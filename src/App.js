@@ -7,6 +7,8 @@ import HomePage from './Components/HomePage/HomePage';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
 
   const router = createBrowserRouter([

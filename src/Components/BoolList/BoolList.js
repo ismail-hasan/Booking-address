@@ -3,9 +3,21 @@ import React from 'react';
 import { FaRegEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { toast } from 'react-toastify';
-import BookingData from '../BookingData/BookingData';
+import AllBookingData from '../AllBookingData/AllBookingData';
 
 const BoolList = () => {
+
+    // get all booking data 
+    const { data: bookingData = [], refetch } = useQuery({
+        queryKey: ["booking"],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/booking')
+            const data = await res.json()
+            return data
+        }
+    })
+
+
     const handleForm = e => {
         e.preventDefault()
         const form = e.target
@@ -32,18 +44,34 @@ const BoolList = () => {
                 if (data.acknowledged) {
                     console.log(data)
                     form.reset()
+                    refetch()
                 }
             })
     }
 
-    // get all booking data 
 
 
 
-    // delete data 
 
+    // // delete data 
 
+    // const handleDelete = (id) => {
+    //     console.log(id)
+    //     fetch(`http://localhost:5000/booking/${id}`, {
+    //         method: "DELETE",
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data)
+    //             if (data.deletedCount > 0) {
+    //                 toast.success('delete done')
+    //                 refetch()
 
+    //             }
+    //         })
+    // }
+
+    // console.log('data', bookingData)
 
     return (
         <div className='px-[60px]'>
@@ -59,11 +87,13 @@ const BoolList = () => {
                         <button className="btn btn-active btn-secondary mt-5">Button</button>
                     </form>
                 </div>
-                <div>
-                    <BookingData></BookingData>
+                <div className='w-[60%]'>
+                    <AllBookingData
+                        bookingData={bookingData}
+                        refetch={refetch}
+                    ></AllBookingData>
                 </div>
             </div>
-
         </div>
     );
 };
