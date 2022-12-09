@@ -1,12 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaRegEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import AllBookingData from '../AllBookingData/AllBookingData';
+import { authcontext } from '../ContextProvider/ContextProvider';
 import Modal from '../Modal/Modal';
 
 const BoolList = () => {
+
+    const { user } = useContext(authcontext)
 
     // get all booking data 
     const { data: bookingData = [], refetch } = useQuery({
@@ -53,37 +56,15 @@ const BoolList = () => {
 
 
 
-
-
-    // // delete data 
-
-    // const handleDelete = (id) => {
-    //     console.log(id)
-    //     fetch(`http://localhost:5000/booking/${id}`, {
-    //         method: "DELETE",
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.log(data)
-    //             if (data.deletedCount > 0) {
-    //                 toast.success('delete done')
-    //                 refetch()
-
-    //             }
-    //         })
-    // }
-
-    // console.log('data', bookingData)
-
     return (
         <div className='px-[60px]'>
             <h1 className='text-3xl mt-10 font-semibold'>Our Book Address</h1>
             <div className='flex gap-x-16 mt-10'>
                 <div className='w-[30%] bg-teal-400 px-5 py-10'>
                     <form action="" onSubmit={handleForm} >
-                        <input type="text" placeholder="First Name" name='firstName' className="input mt-3  w-full input-bordered" />
-                        <input type="text" placeholder="Last Name" name='lastName' className="input mt-3  w-full input-bordered" />
-                        <input type="text" placeholder="Email Address" name='email' className="input mt-3  w-full input-bordered" />
+                        <input type="text" placeholder="UserName" name='firstName' disabled readOnly defaultValue={user?.displayName} className="input mt-3  w-full input-bordered" />
+                        {/* <input type="text" placeholder="Last Name" name='lastName' className="input mt-3  w-full input-bordered" /> */}
+                        <input type="text" placeholder="Email Address" disabled readOnly defaultValue={user?.email} name='email' className="input mt-3  w-full input-bordered" />
                         <input type="text" placeholder="Phone Number" name='phone' className="input mt-3  w-full input-bordered" />
                         <input type="text" placeholder="City" name='city' className="input mt-3  w-full input-bordered" />
                         <button className="btn btn-active btn-secondary mt-5">Button</button>
@@ -97,8 +78,8 @@ const BoolList = () => {
                         setBookingModal={setBookingModal}
                     ></AllBookingData>
 
-                    <Modal 
-                     bookingModal={bookingModal}
+                    <Modal
+                        bookingModal={bookingModal}
                     ></Modal>
                 </div>
             </div>

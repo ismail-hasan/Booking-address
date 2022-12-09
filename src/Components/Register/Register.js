@@ -5,7 +5,7 @@ import { authcontext } from '../ContextProvider/ContextProvider';
 const Register = () => {
     const [error, setError] = useState('')
     const navigate = useNavigate()
-    const { createUser } = useContext(authcontext)
+    const { createUser, userProfile } = useContext(authcontext)
 
     const handleRegister = e => {
         e.preventDefault()
@@ -14,13 +14,41 @@ const Register = () => {
         const email = form.email.value
         const password = form.password.value
         console.log(name, email, password)
+        const userData = { email, password }
+
 
         createUser(email, password)
             .then(result => {
                 const user = result.user
+                handleUserProfile(name)
                 console.log(user)
                 form.reset()
-                navigate()
+                navigate('/')
+            })
+
+        const handleUserProfile = (name) => {
+            const profile = {
+                displayName: name
+
+            };
+
+            userProfile(profile)
+                .then(() => { })
+                .catch(e => console.log(e))
+        };
+
+
+        fetch('http://localhost:5000/alluser',
+            {
+                method: "POST",
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
             })
     }
 
