@@ -6,14 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import ContextProvider from './Components/ContextProvider/ContextProvider';
 
 //
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
-import { getTodos, postTodo } from '../my-api'
+import { QueryClient, QueryClientProvider, } from '@tanstack/react-query'
 const queryClient = new QueryClient()
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

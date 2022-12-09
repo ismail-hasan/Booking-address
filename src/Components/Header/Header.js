@@ -29,16 +29,16 @@ const Header = () => {
                 </div>
                 <div className="navbar-end">
                     <Link to='/login'>
-                        <button class="btn btn-primary mr-4">Login</button>
+                        <button className="btn btn-primary mr-4">Login</button>
                     </Link>
 
                     {
                         user?.email ?
 
-                            <button onClick={handleLogOut} class="btn btn-primary mr-4">Log Out</button>
+                            <button onClick={handleLogOut} className="btn btn-primary mr-4">Log Out</button>
                             :
                             <Link to='/register'>
-                                <button class="btn btn-primary mr-4">Register</button>
+                                <button className="btn btn-primary mr-4">Register</button>
                             </Link>
                     }
                 </div>

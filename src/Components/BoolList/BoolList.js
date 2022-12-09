@@ -1,4 +1,9 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { FaRegEdit } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
+import { toast } from 'react-toastify';
+import BookingData from '../BookingData/BookingData';
 
 const BoolList = () => {
     const handleForm = e => {
@@ -29,15 +34,16 @@ const BoolList = () => {
                     form.reset()
                 }
             })
-
     }
 
-    // get data 
+    // get all booking data 
 
 
-    fetch('http://localhost:5000/booking')
-        .then(res => res.json())
-        .then(data => console.log(data))
+
+    // delete data 
+
+
+
 
     return (
         <div className='px-[60px]'>
@@ -53,31 +59,11 @@ const BoolList = () => {
                         <button className="btn btn-active btn-secondary mt-5">Button</button>
                     </form>
                 </div>
-                <div className='w-[60%]'>
-                    <div className="overflow-x-auto">
-                        <table className="table w-full">
-
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Name</th>
-                                    <th>Job</th>
-                                    <th>Favorite Color</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <td>Cy Ganderton</td>
-                                    <td>Quality Control Specialist</td>
-                                    <td>Blue</td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
+                <div>
+                    <BookingData></BookingData>
                 </div>
             </div>
+
         </div>
     );
 };
