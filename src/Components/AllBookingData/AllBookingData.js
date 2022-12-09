@@ -4,16 +4,8 @@ import { FaRegEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
-const AllBookingData = ({ bookingData, refetch }) => {
-    // const { data: bookingData = [], refetch } = useQuery({
-    //     queryKey: ["booking"],
-    //     queryFn: async () => {
-    //         const res = await fetch('http://localhost:5000/booking')
-    //         const data = await res.json()
-    //         return data
-    //     }
-    // })
-
+const AllBookingData = ({ bookingData, refetch, setBookingModal }) => {
+ 
 
     const handleDelete = (id) => {
         console.log(id)
@@ -26,10 +18,10 @@ const AllBookingData = ({ bookingData, refetch }) => {
                 if (data.deletedCount > 0) {
                     toast.success('delete done')
                     refetch()
-
                 }
             })
     }
+
     return (
         <div>
             <div className="overflow-x-auto">
@@ -40,6 +32,8 @@ const AllBookingData = ({ bookingData, refetch }) => {
                             <th>Name</th>
                             <th>Job</th>
                             <th>Favorite Color</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,9 +44,9 @@ const AllBookingData = ({ bookingData, refetch }) => {
                                 <td>{book.fullName}</td>
                                 <td>{book.email}</td>
                                 <td>{book.city}</td>
-                                <td> <button> <FaRegEdit></FaRegEdit> </button></td>
+                                <td> <label htmlFor="my-modal-3" onClick={() => setBookingModal(book)}> <FaRegEdit></FaRegEdit> </label></td>
                                 <td> <button onClick={() => handleDelete(book._id)}> <MdDelete></MdDelete> </button></td>
-
+                               
                             </tr>)
                         }
                     </tbody>

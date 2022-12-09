@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaRegEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import AllBookingData from '../AllBookingData/AllBookingData';
+import Modal from '../Modal/Modal';
 
 const BoolList = () => {
 
@@ -17,6 +18,7 @@ const BoolList = () => {
         }
     })
 
+    const [bookingModal, setBookingModal] = useState(bookingData)
 
     const handleForm = e => {
         e.preventDefault()
@@ -91,7 +93,13 @@ const BoolList = () => {
                     <AllBookingData
                         bookingData={bookingData}
                         refetch={refetch}
+                        bookingModal={bookingModal}
+                        setBookingModal={setBookingModal}
                     ></AllBookingData>
+
+                    <Modal 
+                     bookingModal={bookingModal}
+                    ></Modal>
                 </div>
             </div>
         </div>
