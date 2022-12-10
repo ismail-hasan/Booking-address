@@ -1,4 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { FaRegEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
@@ -43,10 +42,10 @@ const AllBookingData = ({ bookingData, refetch, setBookingModal }) => {
 
                                 <th>{idx + 1}</th>
                                 <td>{book.bookName}</td>
-                                <td>{book.email}</td>
+                                <td>{book.phone}</td>
                                 <td>{book.city}</td>
-                                <td> <label htmlFor="my-modal-3" onClick={() => setBookingModal(book)}> <FaRegEdit></FaRegEdit> </label></td>
-                                <td> <button onClick={() => handleDelete(book._id)}> <MdDelete></MdDelete> </button></td>
+                                <td> <label htmlFor="my-modal-3" onClick={() => setBookingModal(book)}> <FaRegEdit className='cursor-pointer text-[21px] text-green-500'></FaRegEdit> </label></td>
+                                <td> <button onClick={() => handleDelete(book._id)}> <MdDelete className='cursor-pointer text-[21px] text-red-500'></MdDelete> </button></td>
 
                             </tr>)
                         }

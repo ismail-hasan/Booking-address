@@ -14,7 +14,7 @@ const Header = () => {
     }
     return (
         <div>
-            <div className="navbar bg-red-500">
+            <div className="navbar bg-black">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -22,7 +22,7 @@ const Header = () => {
                         </label>
 
                     </div>
-                    <Link to='/' className="btn btn-ghost normal-case text-xl">Book Address</Link >
+                    <Link to='/' className="btn btn-ghost normal-case text-xl text-white">Book Address</Link >
                 </div>
                 <div className="navbar-center hidden lg:flex">
 

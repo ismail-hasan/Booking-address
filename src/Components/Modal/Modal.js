@@ -1,22 +1,17 @@
 import React, { useContext } from 'react';
 import { authcontext } from '../ContextProvider/ContextProvider';
 
-const Modal = ({ bookingModal, refetch }) => {
+const Modal = ({ bookingModal, refetch, setBookingModal }) => {
     const { user } = useContext(authcontext)
-    // console.log(user)
     const { bookName, city, phone } = bookingModal
-    // console.log('done', bookingModal)
 
 
-
-    //
     const handleMOdalData = (e) => {
         e.preventDefault()
         const bookName = e.target.modalBookName.value
         const phone = e.target.modalPhone.value
-        const city  = e.target.modalCity.value
+        const city = e.target.modalCity.value
         const updateName = { bookName, phone, city }
-        // console.log('pdate', updateName)
 
         fetch(`http://localhost:5000/booking/${bookingModal._id}`, {
             method: "PATCH",
@@ -30,11 +25,11 @@ const Modal = ({ bookingModal, refetch }) => {
                 console.log('updated data', data)
                 if (data.modifiedCount > 0) {
                     refetch()
-                    // setModalData(null)
+
                 }
             })
+        setBookingModal(null)
     }
-    //
 
 
     return (
@@ -45,10 +40,10 @@ const Modal = ({ bookingModal, refetch }) => {
                     <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <h3 className="text-lg font-bold">UserName: {user?.displayName}</h3>
                     <form onSubmit={handleMOdalData} action="">
-                        <input name='modalBookName' type="text" defaultValue={bookName} placeholder="Type here" className="input input-bordered w-full mt-3" />
-                        <input name='modalPhone' type="text" defaultValue={phone} placeholder="Type here" className="input input-bordered w-full mt-3" />
-                        <input name='modalCity' type="text" defaultValue={city} placeholder="Type here" className="input input-bordered w-full mt-3" />
-                        <button className="btn btn-primary mt-5">Button</button>
+                        <input required name='modalBookName' type="text" defaultValue={bookName} placeholder="Type here" className="input input-bordered w-full mt-3" />
+                        <input required name='modalPhone' type="phone" defaultValue={phone} placeholder="Type here" className="input input-bordered w-full mt-3" />
+                        <input required name='modalCity' type="text" defaultValue={city} placeholder="Type here" className="input input-bordered w-full mt-3" />
+                        <button className="btn btn-primary mt-5">Update</button>
                     </form>
                 </div>
             </div>
