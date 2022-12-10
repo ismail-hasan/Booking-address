@@ -28,18 +28,20 @@ const Header = () => {
 
                 </div>
                 <div className="navbar-end">
-                    <Link to='/login'>
-                        <button className="btn btn-primary mr-4">Login</button>
-                    </Link>
 
                     {
                         user?.email ?
 
                             <button onClick={handleLogOut} className="btn btn-primary mr-4">Log Out</button>
                             :
-                            <Link to='/register'>
-                                <button className="btn btn-primary mr-4">Register</button>
-                            </Link>
+                            <>
+                                <Link to='/register'>
+                                    <button className="btn btn-primary mr-4">Register</button>
+                                </Link>
+                                <Link to='/login'>
+                                    <button className="btn btn-primary mr-4">Login</button>
+                                </Link>
+                            </>
                     }
                 </div>
             </div>

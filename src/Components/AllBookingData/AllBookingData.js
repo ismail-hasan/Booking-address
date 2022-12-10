@@ -5,7 +5,7 @@ import { MdDelete } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
 const AllBookingData = ({ bookingData, refetch, setBookingModal }) => {
- 
+
 
     const handleDelete = (id) => {
         console.log(id)
@@ -20,6 +20,7 @@ const AllBookingData = ({ bookingData, refetch, setBookingModal }) => {
                     refetch()
                 }
             })
+        refetch()
     }
 
     return (
@@ -28,10 +29,10 @@ const AllBookingData = ({ bookingData, refetch, setBookingModal }) => {
                 <table className="table w-full">
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>s/n</th>
                             <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
+                            <th>Phone</th>
+                            <th>City</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -41,12 +42,12 @@ const AllBookingData = ({ bookingData, refetch, setBookingModal }) => {
                             bookingData.map((book, idx) => <tr key={book._id}>
 
                                 <th>{idx + 1}</th>
-                                <td>{book.fullName}</td>
+                                <td>{book.bookName}</td>
                                 <td>{book.email}</td>
                                 <td>{book.city}</td>
                                 <td> <label htmlFor="my-modal-3" onClick={() => setBookingModal(book)}> <FaRegEdit></FaRegEdit> </label></td>
                                 <td> <button onClick={() => handleDelete(book._id)}> <MdDelete></MdDelete> </button></td>
-                               
+
                             </tr>)
                         }
                     </tbody>
