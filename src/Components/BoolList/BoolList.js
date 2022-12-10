@@ -21,11 +21,9 @@ const BoolList = () => {
     })
     const [bookingModal, setBookingModal] = useState(bookingData)
 
-    console.log('datasss', bookingData)
-
-    // if (isLoading) {
-    //     return <img src="https://flevix.com/wp-content/uploads/2019/07/Curve-Loading.gif" alt="" />
-    // }
+    if (isLoading) {
+        return <h1>Loading</h1>
+    }
 
 
     const handleForm = e => {
@@ -34,13 +32,11 @@ const BoolList = () => {
         const firstName = form.firstName.value
         const fullName = `${firstName}`
         const email = form.email.value
-        // const bookName = form.bookName.value
         const phone = form.phone.value
         const city = form.city.value
         const book = form.bookName.value
         const bookName = book.toLowerCase()
         console.log(bookName)
-
         const allData = { fullName, email, phone, city, bookName }
 
 
@@ -55,61 +51,58 @@ const BoolList = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                if (data.acknowledged) {
+                if (data.acknowledged && user?.email) {
+                    toast.success('Book Added')
+
                     form.reset()
                     refetch()
                 }
                 else if (data.result) {
-                    toast.error('Already Added')
+                    toast.error('Already Added This Book')
+                }
+                else {
+                    toast.error("Login First")
                 }
             })
     }
-    // refetch()
 
     return (
         <>
-            {
-                user?.email &&
+            <div className='px-[60px]'>
 
-                <div className='px-[60px]'>
-                    {
-                        isLoading && <img src="https://flevix.com/wp-content/uploads/2019/07/Curve-Loading.gif" alt="" />
-                    }
-                    < h1 className='text-3xl mt-10 font-semibold' >Add Your Book Address</ h1>
-                    <div className='flex gap-x-16 mt-10'>
-                        <div className='w-[30%] bg-teal-400 px-5 py-10'>
-                            <form action="" onSubmit={handleForm} >
-                                <input type="text" placeholder="UserName" name='firstName' disabled readOnly defaultValue={user?.displayName} className="input mt-3  w-full input-bordered" />
-                                <input required type="text" placeholder="Email Address" disabled readOnly defaultValue={user?.email} name='email' className="input mt-3  w-full input-bordered" />
-                                <input required type="text" placeholder="Book Name" name='bookName' className="input mt-3  w-full input-bordered" />
-                                <input required type="number" placeholder="Phone Number" name='phone' className="input mt-3  w-full input-bordered" />
-                                <input required type="text" placeholder="City" name='city' className="input mt-3  w-full input-bordered" />
-                                <button className="btn btn-active btn-primary mt-5">Button</button>
-
-                            </form>
-                        </div>
-                        <div className='w-[60%]'>
-                            <AllBookingData
-                                bookingData={bookingData}
-                                refetch={refetch}
-                                bookingModal={bookingModal}
-                                setBookingModal={setBookingModal}
-                            ></AllBookingData>
-
-                            {bookingModal &&
-                                <Modal
-                                    bookingModal={bookingModal}
-                                    refetch={refetch}
-                                    setBookingModal={setBookingModal}
-                                ></Modal>
-                            }
-                        </div>
+                < h1 className='text-3xl mt-10 font-semibold' >Add Your Book Address</ h1>
+                <div className='lg:flex gap-x-16 mt-10'>
+                    <div className='w-full lg:w-[30%] bg-teal-400 px-5 py-10'>
+                        <form action="" onSubmit={handleForm} >
+                            <input type="text" placeholder="UserName" name='firstName' disabled readOnly defaultValue={user?.displayName} className="input mt-3  w-full input-bordered" />
+                            <input required type="text" placeholder="Email Address" disabled readOnly defaultValue={user?.email} name='email' className="input mt-3  w-full input-bordered" />
+                            <input required type="text" placeholder="Book Name" name='bookName' className="input mt-3  w-full input-bordered" />
+                            <input required type="number" placeholder="Phone Number" name='phone' className="input mt-3  w-full input-bordered" />
+                            <input required type="text" placeholder="City" name='city' className="input mt-3  w-full input-bordered" />
+                            <button className="btn btn-active btn-primary mt-5">Submit</button>
+                        </form>
                     </div>
 
+
+                    <div className='sm:w-full lg:w-[60%] mb-20'>
+                        <AllBookingData
+                            bookingData={bookingData}
+                            refetch={refetch}
+                            bookingModal={bookingModal}
+                            setBookingModal={setBookingModal}
+                        ></AllBookingData>
+
+                        {bookingModal &&
+                            <Modal
+                                bookingModal={bookingModal}
+                                refetch={refetch}
+                                setBookingModal={setBookingModal}
+                            ></Modal>
+                        }
+                    </div>
                 </div>
-                    
-            
-            }
+
+            </div>
 
         </>
     );

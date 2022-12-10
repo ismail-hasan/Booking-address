@@ -7,7 +7,6 @@ const AllBookingData = ({ bookingData, refetch, setBookingModal }) => {
 
 
     const handleDelete = (id) => {
-        console.log(id)
         fetch(`http://localhost:5000/booking/${id}`, {
             method: "DELETE",
         })
@@ -15,7 +14,7 @@ const AllBookingData = ({ bookingData, refetch, setBookingModal }) => {
             .then(data => {
                 console.log(data)
                 if (data.deletedCount > 0) {
-                    toast.success('delete done')
+                    toast.error('book deleted')
                     refetch()
                 }
             })
@@ -46,7 +45,6 @@ const AllBookingData = ({ bookingData, refetch, setBookingModal }) => {
                                 <td>{book.city}</td>
                                 <td> <label htmlFor="my-modal-3" onClick={() => setBookingModal(book)}> <FaRegEdit className='cursor-pointer text-[21px] text-green-500'></FaRegEdit> </label></td>
                                 <td> <button onClick={() => handleDelete(book._id)}> <MdDelete className='cursor-pointer text-[21px] text-red-500'></MdDelete> </button></td>
-
                             </tr>)
                         }
                     </tbody>

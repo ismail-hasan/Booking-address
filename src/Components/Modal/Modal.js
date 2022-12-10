@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { toast } from 'react-toastify';
 import { authcontext } from '../ContextProvider/ContextProvider';
 
 const Modal = ({ bookingModal, refetch, setBookingModal }) => {
@@ -25,7 +26,7 @@ const Modal = ({ bookingModal, refetch, setBookingModal }) => {
                 console.log('updated data', data)
                 if (data.modifiedCount > 0) {
                     refetch()
-
+                    toast.success("book updated")
                 }
             })
         setBookingModal(null)
