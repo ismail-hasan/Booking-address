@@ -25,7 +25,7 @@ const Register = () => {
                     email: user.email
                 }
                 console.log(currentUser)
-                // fetch('http://localhost:5000/jwt', {
+                // fetch('https://addressbook-ochre.vercel.app/jwt', {
                 //     method: 'POST',
                 //     headers: {
                 //         'content-type': 'application/json'
@@ -52,7 +52,7 @@ const Register = () => {
         };
 
 
-        fetch('http://localhost:5000/alluser',
+        fetch('https://addressbook-ochre.vercel.app/alluser',
             {
                 method: "POST",
                 headers: {
@@ -70,7 +70,7 @@ const Register = () => {
 
 
     const getUserToken = email => {
-        fetch(`http://localhost:5000/jwt?email=${email}`)
+        fetch(`https://addressbook-ochre.vercel.app/jwt?email=${email}`)
             .then(res => res.json())
             .then(data => {
                 if (data.accessToken) {

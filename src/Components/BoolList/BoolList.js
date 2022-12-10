@@ -14,7 +14,7 @@ const BoolList = () => {
     const { data: bookingData = [], refetch, isLoading } = useQuery({
         queryKey: ["booking", user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/booking?email=${user?.email}`)
+            const res = await fetch(`https://addressbook-ochre.vercel.app/booking?email=${user?.email}`)
             const data = await res.json()
             return data
         }
@@ -41,7 +41,7 @@ const BoolList = () => {
 
 
 
-        fetch('http://localhost:5000/booking', {
+        fetch('https://addressbook-ochre.vercel.app/booking', {
             method: "POST",
             headers: {
                 'content-type': 'application/json',

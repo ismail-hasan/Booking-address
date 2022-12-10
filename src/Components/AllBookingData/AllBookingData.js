@@ -7,7 +7,7 @@ const AllBookingData = ({ bookingData, refetch, setBookingModal }) => {
 
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/booking/${id}`, {
+        fetch(`https://addressbook-ochre.vercel.app/booking/${id}`, {
             method: "DELETE",
         })
             .then(res => res.json())

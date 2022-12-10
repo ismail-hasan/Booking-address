@@ -14,7 +14,7 @@ const Modal = ({ bookingModal, refetch, setBookingModal }) => {
         const city = e.target.modalCity.value
         const updateName = { bookName, phone, city }
 
-        fetch(`http://localhost:5000/booking/${bookingModal._id}`, {
+        fetch(`https://addressbook-ochre.vercel.app/booking/${bookingModal._id}`, {
             method: "PATCH",
             headers: {
                 'content-type': "application/json"
