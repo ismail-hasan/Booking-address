@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { json, Link, useNavigate } from 'react-router-dom';
 import { authcontext } from '../ContextProvider/ContextProvider';
 
 const Register = () => {
@@ -21,9 +21,23 @@ const Register = () => {
             .then(result => {
                 const user = result.user
                 handleUserProfile(name)
-                console.log(user)
-                form.reset()
-                navigate('/')
+                const currentUser = {
+                    email: user.email
+                }
+                console.log(currentUser)
+                // fetch('http://localhost:5000/jwt', {
+                //     method: 'POST',
+                //     headers: {
+                //         'content-type': 'application/json'
+                //     },
+                //     body: JSON.stringify(currentUser)
+                // })
+                //     .then(res => res.json())
+                //     .then(data => {
+                //         console.log("token", data)
+                //     })
+                // form.reset()
+                // navigate('/')
             })
 
         const handleUserProfile = (name) => {
@@ -49,8 +63,25 @@ const Register = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
+
+            })
+        getUserToken(email)
+    }
+
+
+    const getUserToken = email => {
+        fetch(`http://localhost:5000/jwt?email=${email}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.accessToken) {
+                    localStorage.setItem('accessToken', data.accessToken)
+                    navigate('/')
+                }
             })
     }
+
+
+
 
     return (
         <div className="hero py-10 min-h-screen bg-base-200">
